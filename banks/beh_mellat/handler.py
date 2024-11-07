@@ -68,7 +68,7 @@ class BehPardakhtMellatPayment:
             try:
                 status, token = pay_response.split(",")
 
-                self.update_transaction(gateway_transaction, {'ref_id': token})
+                self.update_transaction(gateway_transaction, {'ref_id': token, 'status_code': status})
 
                 return status, token
 
