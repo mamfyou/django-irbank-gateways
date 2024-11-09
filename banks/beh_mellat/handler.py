@@ -137,30 +137,3 @@ class BehPardakhtMellatPayment:
                                                        saleOrderId=order_id,
                                                        saleReferenceId=sale_reference_id)
         return status_code
-
-
-def apply_purchase(func):
-    def inner(request):
-        data = request.body.decode('utf-8')
-        params = dict(param.split('=') for param in data.split('&') if '=' in param)
-
-        ref_id = params.get('RefId')
-        status_code = params.get('ResCode')
-        order_id = params.get('SaleOrderId')
-        sale_reference_id = params.get('SaleReferenceId')
-        result = func()
-        success_status_code = "0"
-
-        # retrieve user based on your logic(can't get it from request.user)
-        # you should work on url_kwargs defined in the previous function
-        user = 'sample user'
-        if not data:
-            logging.debug("این لینک معتبر نیست.")
-            return HttpResponse('این لینک معتبر نمی باشد.')
-
-        success_url = 'https://example.com/successful'
-        fail_url = 'https://example.com/successful'
-
-        return result
-
-    return inner
