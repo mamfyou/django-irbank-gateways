@@ -44,7 +44,6 @@ def response(request):
     data = request.body.decode('utf-8')
     params = dict(param.split('=') for param in data.split('&') if '=' in param)
 
-    ref_id = params.get('RefId')
     status_code = params.get('ResCode')
     order_id = params.get('SaleOrderId')
     sale_reference_id = params.get('SaleReferenceId')
@@ -60,7 +59,7 @@ def response(request):
         return HttpResponse('این لینک معتبر نمی باشد.')
 
     success_url = 'https://example.com/successful'
-    fail_url = 'https://example.com/successful'
+    fail_url = 'https://example.com/unsuccessful'
 
     if str(status_code) == success_status_code:
         from banks.beh_mellat.handler import BehPardakhtMellatPayment
